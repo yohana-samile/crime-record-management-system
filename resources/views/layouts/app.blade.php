@@ -14,6 +14,8 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ url('css/style.css')}}">
+    <link rel="stylesheet" href="{{ url('datatables/dataTables.bootstrap4.min.css')}}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -34,19 +36,19 @@
                         <a href="{{url('home')}}" class="text-decoration-none"><span class="fa fa-home mr-3"></span> Home</a>
                     </li>
                     <li>
-                        <a href="#" class="text-decoration-none"><span class="fa fa-user mr-3"></span> Users</a>
+                        <a href="{{url('user')}}" class="text-decoration-none"><span class="fa fa-user mr-3"></span> Users</a>
                     </li>
                     <li>
-                        <a href="#" class="text-decoration-none"><span class="fa fa-briefcase mr-3"></span> Reporters</a>
+                        <a href="{{ url('report_new_crime')}}" class="text-decoration-none"><span class="fa fa-briefcase mr-3"></span> Report Crime</a>
                     </li>
                     <li>
-                        <a href="#" class="text-decoration-none"><span class="fa fa-sticky-note mr-3"></span> Crime Reported</a>
+                        <a href="{{url ('case_reported')}}" class="text-decoration-none"><span class="fa fa-sticky-note mr-3"></span> Crime Reported</a>
                     </li>
                     <li>
-                        <a href="{{url('roles/index')}}" class="text-decoration-none"><span class="fa fa-suitcase mr-3"></span> Roles</a>
+                        <a href="{{url('index')}}" class="text-decoration-none"><span class="fa fa-suitcase mr-3"></span> Roles</a>
                     </li>
                     <li>
-                        <a href="{{url('case_type')}}" class="text-decoration-none"><span class="fa fa-cogs mr-3"></span> Case Type</a>
+                        <a href="{{url('crimeTypes/index')}}" class="text-decoration-none"><span class="fa fa-cogs mr-3"></span> Case Type</a>
                     </li>
                     <li>
                         <a class="dropdown-item" href="{{ route('logout') }}"
@@ -129,5 +131,11 @@
     <script src="{{ url('js/jquery.min.js')}}"></script>
     <script src="{{ url('js/bootstrap.min.js')}}"></script>
     <script src="{{ url('js/main.js')}}"></script>
+    <script src="{{ url('js/custom.js')}}"></script>
+    {{-- <script src="{{ url('datatables/dataTables.bootstrap4.min.js')}}"></script> --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url('datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{ url('js/demo/datatables-demo.js')}}"></script>
+
 </body>
 </html>

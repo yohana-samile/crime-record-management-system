@@ -1,10 +1,13 @@
 <?php
+    namespace App\Http\Controllers;
+    use Illuminate\Http\Request;
+    use DB;
+    use App\Models\Role;
 
-namespace App\Http\Controllers;
+    class RoleController extends Controller {
+        public function index() {
+            $roles = Role::get();
+            return view('roles/index', compact('roles'));
+        }
+    }
 
-use Illuminate\Http\Request;
-
-class RoleController extends Controller
-{
-    //
-}

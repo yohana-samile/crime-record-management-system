@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('caseReporteds', function (Blueprint $table) {
+        Schema::create('case_reporteds', function (Blueprint $table) {
             $table->id();
             $table->string('rb_number');
-            $table->text('case_discription');
+            $table->text('case_discription')->nullable();
             $table->foreignIdFor(\App\Models\Crime_type::class);
             $table->string('region');
             $table->string('district');
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('caseReporteds');
+        Schema::dropIfExists('case_reporteds');
     }
 };
