@@ -6,8 +6,7 @@
     use Illuminate\Notifications\Notifiable;
     use Laravel\Sanctum\HasApiTokens;
 
-    class User extends Authenticatable
-    {
+    class User extends Authenticatable {
         use HasApiTokens, HasFactory, Notifiable;
 
         /**
@@ -16,9 +15,7 @@
          * @var array<int, string>
          */
         protected $fillable = [
-            'name',
-            'email',
-            'password',
+            'name', 'email', 'password', 'role_id'
         ];
 
         /**
@@ -27,8 +24,7 @@
          * @var array<int, string>
          */
         protected $hidden = [
-            'password',
-            'remember_token',
+            'password', 'remember_token',
         ];
 
         /**
@@ -37,14 +33,17 @@
          * @var array<string, string>
          */
         protected $casts = [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            'email_verified_at' => 'datetime', 'password' => 'hashed',
         ];
-        public function police(){
-            return $this->hasOne(Police::class);
+        
+        public function policeStaff() {
+            return $this->hasOne(PoliceStaff::class);
         }
         public function reporter(){
             return $this->hasOne(Reporter::class);
+        }
+        public function role(){
+            return $this->belongsTo(Role::class);
         }
     }
 

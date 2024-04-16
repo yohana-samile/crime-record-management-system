@@ -149,4 +149,56 @@ $(document).ready(function () {
 
         });
     });
+
+    // register_police_staff
+    $('#register_police_staff').on('submit', function (e) {
+        e.preventDefault();
+        let formData = new FormData(this);
+        let url = "register_police_staff";
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                swal.fire("success", "Police Staff Registered Successfully").then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "/user"  ;
+                    }
+                });
+                $('#register_police_staff')[0].reset();
+            },
+            error: function(xhr, status, error) {
+                swal.fire("error", "Something Went Wrong, Try Again");
+            }
+        });
+    });
+
+
+    $('#crime_report_action').on('submit', function (e) {
+        e.preventDefault();
+        let formData = new FormData(this);
+        let url = "crime_report_action";
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                swal.fire("success", "Police Staff Registered Successfully, you can login to check case info").then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "/login";
+                    }
+                });
+                $('#crime_report_action')[0].reset();
+            },
+            error: function(xhr, status, error) {
+                swal.fire("error", "Something Went Wrong, Try Again");
+            }
+        });
+    });
 });

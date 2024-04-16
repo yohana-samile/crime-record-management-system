@@ -16,6 +16,7 @@
                 'name' => 'Developer Samile',
                 'email' => 'yohanasamile@gmail.com',
                 'password' => Hash::make('12345678'),
+                'role_id' => 1
             ]);
         }
     }

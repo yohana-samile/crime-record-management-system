@@ -6,10 +6,10 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-md-6">
-                        <h4>Users Registered</h4>
+                        <h4>Reporters</h4>
                     </div>
                     <div class="col-md-6 float-right">
-                        <a href="{{url('register_user')}}" class="btn btn-sm btn-primary float-right">Add Police Staff <i class="fa fa-plus"></i></a>
+                        {{-- <a href="{{url('register_user')}}" class="btn btn-sm btn-primary float-right">Add Police Staff <i class="fa fa-plus"></i></a> --}}
                     </div>
                 </div>
             </div>
@@ -22,9 +22,7 @@
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Badge Number</th>
-                                <th>Rank</th>
-                                <th>Is_Police_staff</th>
+                                <th>Phone Number</th>
                                 <th>Registered At</th>
                                 <th>Action</th>
                             </tr>
@@ -34,37 +32,23 @@
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Badge Number</th>
-                                <th>Rank</th>
-                                <th>Is_Police_staff</th>
+                                <th>Phone Number</th>
                                 <th>Registered At</th>
                                 <th>Action</th>
                             </tr>
                         </tfoot>
                         <tbody>
-                            @if (!empty($users))
+                            @if (!empty($reporters))
                             @php
                                 $index = 1;
                             @endphp
-                                @foreach ($users as $user)
+                                @foreach ($reporters as $reporter)
                                     <tr>
                                         <td>{{ $index++ }}</td>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->email }}</td>
-                                        <td>{{ $user->badge_number }}</td>
-                                        <td>{{ $user->rank_name }}</td>
-                                        <td>
-                                            @if ($user->role_name != 'is_admin')
-                                            <p class="text-center">
-                                                <i class="fa fa-toggle-on text-primary text-center"></i>
-                                            </p>
-                                            @else
-                                                <p class="text-center">
-                                                    <i class="fa fa-toggle-off text-primary text-center"></i>
-                                                </p>
-                                            @endif
-                                        </td>
-                                        <td>{{ $user->created_at }}</td>
+                                        <td>{{ $reporter->name }}</td>
+                                        <td>{{ $reporter->email }}</td>
+                                        <td>{{ $reporter->phone_number }}</td>
+                                        <td>{{ $reporter->created_at }}</td>
                                         <td>
                                             <div class="row">
                                                 <div class="col-md-4">

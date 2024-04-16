@@ -8,6 +8,6 @@
         use HasFactory;
         protected $fillable = ['name'];
         public function user(){
-            return $this->belongToMany(User::class);
+            return $this->hasMany(User::class);
         }
     }

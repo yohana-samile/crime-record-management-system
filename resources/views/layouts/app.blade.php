@@ -39,6 +39,9 @@
                         <a href="{{url('user')}}" class="text-decoration-none"><span class="fa fa-user mr-3"></span> Users</a>
                     </li>
                     <li>
+                        <a href="{{url('reporter')}}" class="text-decoration-none"><span class="fa fa-user mr-3"></span> Reportes</a>
+                    </li>
+                    <li>
                         <a href="{{ url('report_new_crime')}}" class="text-decoration-none"><span class="fa fa-briefcase mr-3"></span> Report Crime</a>
                     </li>
                     <li>
@@ -132,8 +135,8 @@
     <script src="{{ url('js/bootstrap.min.js')}}"></script>
     <script src="{{ url('js/main.js')}}"></script>
     <script src="{{ url('js/custom.js')}}"></script>
-    {{-- <script src="{{ url('datatables/dataTables.bootstrap4.min.js')}}"></script> --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {{-- <script src="{{ url('datatables/dataTables.bootstrap4.min.js')}}"></script> --}}
     <script src="{{ url('datatables/jquery.dataTables.min.js')}}"></script>
     <script src="{{ url('js/demo/datatables-demo.js')}}"></script>
 

@@ -13,11 +13,11 @@ php artisan db:seed --class=Crime_typeSeeder
 
 php artisan db:seed --class=RoleSeeder
 
+php artisan db:seed --class=Rankseeder
+
 php artisan db:seed --class=UserSeeder
 
-
-php artisan db:seed --class=UserRoleSeeder
-
+php artisan db:seed --class=UserRoleSeeder //leave it
 
 username = yohanasamile@gmail.com
 

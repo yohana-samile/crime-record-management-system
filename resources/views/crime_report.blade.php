@@ -12,6 +12,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -31,7 +32,7 @@
                 <div class="card">
                     <div class="card-header text-center">{{ __('Report Crime And Get Free Registration ') }}</div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('register') }}">
+                        <form id="crime_report_action">
                             @csrf
                             <div class="mb-3">
                                 <label for="region" class="col-form-label text-md-end">{{ __('Enter discription (this field is option)') }}</label>
@@ -39,27 +40,33 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="crime_type" class="col-form-label text-md-end">{{ __('Choose crime_type') }}</label>
-                                <select name="crime_type" id="crime_type" class="form-control">
-                                    <option hidden selected disabled>Choose Crime Type</option>
-                                    <option value=""></option>
+                                <select name="crime_type_id" id="crime_type" class="form-control" required>
+                                    <option selected disabled hidden>Choose Type Of Crime</option>
+                                    @foreach ($crimes as $crime)
+                                        <option value="{{ $crime->id }}">{{ $crime->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
 
                             <div class="mb-3">
-                                <label for="region" class="col-form-label text-md-end">{{ __('Region You Report') }}</label>
-                                <input id="region" type="text" class="form-control" name="region" required>
+                                <select name="region" id="region" class="form-control" required>
+                                    <option selected disabled hidden>Choose region</option>
+                                    @foreach ($regions as $region)
+                                        <option value="{{ $region->name }}">{{ $region->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
 
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label for="district" class="col-form-label text-md-end">{{ __('District') }}</label>
-                                    <input id="district" type="text" class="form-control" name="district" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="ward" class="col-form-label text-md-end">{{ __('Ward') }}</label>
-                                    <input id="ward" type="text" class="form-control" name="ward" required>
-                                </div>
+                            <div class="mb-3">
+                                <select name="district" id="district" class="form-control" required disabled>
+                                    <option selected disabled hidden>Choose district</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <select name="ward" id="ward" class="form-control" required disabled>
+                                    <option selected disabled hidden>Choose ward</option>
+                                </select>
                             </div>
 
                             <div class="mb-3">
@@ -70,6 +77,11 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="phone_number" class="col-form-label text-md-end">{{ __('phone number') }}</label>
+                                <input id="phone_number" type="tel" class="form-control" name="phone_number" required>
                             </div>
 
                             <div class="row">
@@ -93,7 +105,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="row mb-0">
                                 <input type="submit" value="Report Crime & Register Me" class="form-control bg-primary text-white">
                             </div>
@@ -103,5 +115,10 @@
             </div>
         </div>
     </div>
+    <script src="{{ url('js/jquery.min.js')}}"></script>
+    <script src="{{ url('js/bootstrap.min.js')}}"></script>
+    <script src="{{ url('js/main.js')}}"></script>
+    <script src="{{ url('js/custom.js')}}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </body>
 </html>

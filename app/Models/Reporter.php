@@ -6,7 +6,7 @@
     class Reporter extends Model {
         use HasFactory;
         protected $fillable = [
-            'user', 'phone_number'
+            'user_id', 'phone_number'
         ];
         public function caseReported(){
             return $this->hasMany(CaseReported::class);

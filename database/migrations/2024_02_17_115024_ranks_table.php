@@ -8,13 +8,12 @@
         /**
          * Run the migrations.
          */
-        public function up(): void {
-            Schema::create('reporters', function (Blueprint $table) {
+        public function up(): void
+        {
+            Schema::create('ranks', function (Blueprint $table) {
                 $table->id();
-                $table->integer('phone_number');
-                $table->unsignedBigInteger('user_id');
+                $table->string('name');
                 $table->timestamps();
-                $table->foreign('user_id')->references('id')->on('users');
             });
         }
 
@@ -23,7 +22,7 @@
          */
         public function down(): void
         {
-            Schema::dropIfExists('reporters');
+            Schema::dropIfExists('ranks');
         }
     };
 

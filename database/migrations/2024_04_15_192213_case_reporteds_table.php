@@ -15,12 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string('rb_number');
             $table->text('case_discription')->nullable();
-            $table->foreignIdFor(\App\Models\Crime_type::class);
+            $table->unsignedBigInteger('crime_type_id');
+            $table->unsignedBigInteger('reporter_id');
             $table->string('region');
             $table->string('district');
             $table->string('ward');
             $table->string('case_status')->default('pending');
-            $table->foreignIdFor(\App\Models\Reporter::class);
+            $table->foreign('crime_type_id')->references('id')->on('crime_types');
+            $table->foreign('reporter_id')->references('id')->on('reporters');
             $table->timestamps();
         });
     }

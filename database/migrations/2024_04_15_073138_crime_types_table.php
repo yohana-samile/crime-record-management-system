@@ -9,8 +9,7 @@
         /**
          * Run the migrations.
          */
-        public function up(): void
-        {
+        public function up(): void {
             Schema::create('crime_types', function (Blueprint $table) {
                 $table->id();
                 $table->string('name');

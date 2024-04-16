@@ -18,11 +18,11 @@
     Route::get('/', function () {
         return view('auth/login');
     });
+    Route::get('/crime_report', [App\Http\Controllers\CrimeReportController::class, 'crime_report'])->name('crime_report');
+    Route::post('crime_report_action', [App\Http\Controllers\CrimeReportController::class, 'crime_report_action'])->name('crime_report_action');
 
     Auth::routes();
-
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::get('/crime_report', [App\Http\Controllers\CrimeReportController::class, 'crime_report'])->name('crime_report');
 
     Route::controller(RoleController::class)->group(function () {
         Route::get('index', 'index');
@@ -48,4 +48,9 @@
 
     Route::controller(UserController::class)->group(function () {
         Route::get('user', 'user');
+        Route::get('register_user', 'register_user');
+        Route::post('register_police_staff', 'register_police_staff')->name('register_police_staff');
+
+        // reporters
+        Route::get('reporter', 'reporter');
     })->middleware('auth');
