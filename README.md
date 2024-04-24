@@ -63,4 +63,3 @@ report-crime
 
 
 ![casestts2](https://github.com/yohana-samile/crime-record-management-system/assets/99715781/f91919b7-6db9-4c91-86be-3fa310c5f383)
-
