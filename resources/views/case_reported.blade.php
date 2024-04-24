@@ -1,5 +1,10 @@
 @extends('layouts.app')
 @section('content')
+    @php
+        $userId = Auth::user()->id;
+        $userRole = DB::select("SELECT roles.name as role_name, users.id from roles, users where users.role_id = roles.id and users.id = '$userId' ");
+        $userRole = $userRole[0];
+    @endphp
     <div class="container">
         @include('includes.urls')
         <div class="card">
@@ -19,7 +24,9 @@
                                 <th>Crimed_for</th>
                                 <th>Time Repoted</th>
                                 <th>Case Status</th>
-                                <th>Action</th>
+                                @if ($userRole->role_name !== 'is_crime_reporter')
+                                    <th>Action</th>
+                                @endif
                             </tr>
                         </thead>
                         <tfoot>
@@ -31,7 +38,9 @@
                                 <th>Crimed_for</th>
                                 <th>Time Repoted</th>
                                 <th>Case Status</th>
-                                <th>Action</th>
+                                @if ($userRole->role_name !== 'is_crime_reporter')
+                                    <th>Action</th>
+                                @endif
                             </tr>
                         </tfoot>
                         <tbody>
@@ -52,15 +61,18 @@
                                             @else
                                                 <div class="badge badge-danger">{{ $case->case_status}}</div>
                                             @endif
-                                        <td>
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <a href="{{ url('update_case_status', ['id' => $case->id])}}">
-                                                        <i class="fa fa-edit text-success"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
                                         </td>
+                                        @if ($userRole->role_name !== 'is_crime_reporter')
+                                            <td>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <a href="{{ url('update_case_status', ['id' => $case->id])}}">
+                                                            <i class="fa fa-edit text-success"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        @endif
                                     </tr>
                                 @endforeach
                             @endif

@@ -21,6 +21,12 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
+    @php
+        use Illuminate\Support\Facades\DB;
+        $userId = Auth::user()->id;
+        $userRole = DB::select("SELECT roles.name as role_name, users.id from roles, users where users.role_id = roles.id and users.id = '$userId' ");
+        $userRole = $userRole[0];
+    @endphp
     <div class="wrapper d-flex align-items-stretch">
         <nav id="sidebar">
             <div class="custom-menu">
@@ -35,24 +41,30 @@
                     <li class="active">
                         <a href="{{url('home')}}" class="text-decoration-none"><span class="fa fa-home mr-3"></span> Home</a>
                     </li>
-                    <li>
-                        <a href="{{url('user')}}" class="text-decoration-none"><span class="fa fa-user mr-3"></span> Users</a>
-                    </li>
-                    <li>
-                        <a href="{{url('reporter')}}" class="text-decoration-none"><span class="fa fa-user mr-3"></span> Reportes</a>
-                    </li>
+                    @if ($userRole->role_name !== 'is_crime_reporter')
+                        <li>
+                            <a href="{{url('user')}}" class="text-decoration-none"><span class="fa fa-user mr-3"></span> Users</a>
+                        </li>
+                        <li>
+                            <a href="{{url('reporter')}}" class="text-decoration-none"><span class="fa fa-user mr-3"></span> Reportes</a>
+                        </li>
+                    @endif
+
                     <li>
                         <a href="{{ url('report_new_crime')}}" class="text-decoration-none"><span class="fa fa-briefcase mr-3"></span> Report Crime</a>
                     </li>
                     <li>
                         <a href="{{url ('case_reported')}}" class="text-decoration-none"><span class="fa fa-sticky-note mr-3"></span> Crime Reported</a>
                     </li>
-                    <li>
-                        <a href="{{url('index')}}" class="text-decoration-none"><span class="fa fa-suitcase mr-3"></span> Roles</a>
-                    </li>
-                    <li>
-                        <a href="{{url('crimeTypes/index')}}" class="text-decoration-none"><span class="fa fa-cogs mr-3"></span> Case Type</a>
-                    </li>
+
+                    @if ($userRole->role_name !== 'is_crime_reporter')
+                        <li>
+                            <a href="{{url('index')}}" class="text-decoration-none"><span class="fa fa-suitcase mr-3"></span> Roles</a>
+                        </li>
+                        <li>
+                            <a href="{{url('crimeTypes/index')}}" class="text-decoration-none"><span class="fa fa-cogs mr-3"></span> Case Type</a>
+                        </li>
+                    @endif
                     <li>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
@@ -72,64 +84,7 @@
                 @yield('content')
             </main>
         </div>
-
     </div>
-    {{-- <div id="app"> --}}
-        {{-- <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav> --}}
-
-    {{-- </div> --}}
 
     <script src="{{ url('js/jquery.min.js')}}"></script>
     <script src="{{ url('js/bootstrap.min.js')}}"></script>
