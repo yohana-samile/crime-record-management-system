@@ -6,7 +6,7 @@
     class CaseReported extends Model {
         use HasFactory;
         protected $fillable = [
-            'rb_number', 'reporter_id', 'crime_type_id', 'region', 'district', 'ward'
+            'rb_number', 'reporter_id', 'crime_type_id', 'region', 'district', 'ward', 'case_discription'
         ];
         public function reporter(){
             return $this->belongsToMany(Reporter::class);

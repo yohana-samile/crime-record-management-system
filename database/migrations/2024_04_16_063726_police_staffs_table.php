@@ -17,6 +17,7 @@
                 $table->string('gender');
                 $table->integer('phone_number');
                 $table->string('address');
+                $table->string('region');
                 $table->unsignedBigInteger('user_id');
                 $table->unsignedBigInteger('rank_id');
                 $table->timestamps();

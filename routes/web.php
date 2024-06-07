@@ -37,6 +37,10 @@
         Route::get('crimeTypes/index', 'index');
         Route::get('crimeTypes/add_crime_type', 'add_crime_type');
         Route::post('crimeTypes/submit_crime_type', 'submit_crime_type')->name('crimeTypes/submit_crime_type');
+        // edit
+        Route::get('crimeTypes/edit_crime_type/{id}', 'edit_crime_type');
+        Route::post('crimeTypes/edit_crime_type_action', 'edit_crime_type_action')->name('crimeTypes/edit_crime_type_action');
+        Route::post('crimeTypes/delete_crime_type/{id}', 'delete_crime_type')->name('crimeTypes/delete_crime_type');
 
         Route::get('report_new_crime', 'report_new_crime');
         Route::post('report_new_crime_action', 'report_new_crime_action')->name('report_new_crime_action');

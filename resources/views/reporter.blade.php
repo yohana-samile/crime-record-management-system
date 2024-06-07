@@ -24,7 +24,6 @@
                                 <th>Email</th>
                                 <th>Phone Number</th>
                                 <th>Registered At</th>
-                                <th>Action</th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -34,7 +33,6 @@
                                 <th>Email</th>
                                 <th>Phone Number</th>
                                 <th>Registered At</th>
-                                <th>Action</th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -47,27 +45,8 @@
                                         <td>{{ $index++ }}</td>
                                         <td>{{ $reporter->name }}</td>
                                         <td>{{ $reporter->email }}</td>
-                                        <td>{{ $reporter->phone_number }}</td>
+                                        <td>+255 (0) {{ $reporter->phone_number }}</td>
                                         <td>{{ $reporter->created_at }}</td>
-                                        <td>
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <a href="javascript:void()">
-                                                        <i class="fa fa-eye text-primary"></i>
-                                                    </a>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <a href="javascript:void()">
-                                                        <i class="fa fa-edit text-success"></i>
-                                                    </a>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <a href="javascript:void()">
-                                                        <i class="fa fa-trash text-danger"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </td>
                                     </tr>
                                 @endforeach
                             @endif

@@ -16,6 +16,21 @@
                 </div>
             </div>
             <div class="card-body">
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        <strong>{{ session('success') }}</strong>
+                    </div>
+                @endif
+
+                @if($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="alert alert-success" style="display: none;"></div>
                 <div class="table-responsive table-bordered">
                     <table class="table" id="dataTable" width="100%" cellspacing="0">
@@ -47,14 +62,18 @@
                                         <td>{{ $crime->created_at }}</td>
                                         <td>
                                             <div class="row">
-                                                <div class="col-md-4">
-                                                    <i class="fa fa-eye text-primary"></i>
+                                                <div class="col-md-6">
+                                                    <a href="{{ url('crimeTypes/edit_crime_type', ['id' =>$crime->id])}}">
+                                                        <i class="fa fa-edit text-success"></i>
+                                                    </a>
                                                 </div>
-                                                <div class="col-md-4">
-                                                    <i class="fa fa-edit text-success"></i>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <i class="fa fa-trash text-danger"></i>
+                                                <div class="col-md-6">
+                                                    <form action="{{ route('crimeTypes/delete_crime_type', ['id' =>$crime->id]) }}" method="POST">
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-white">
+                                                            <i class="fa fa-trash text-danger"></i>
+                                                        </button>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </td>

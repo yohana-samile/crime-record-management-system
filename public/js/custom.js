@@ -15,7 +15,7 @@ $(document).ready(function () {
                 $('#submit_crime_type')[0].reset();
             },
             error: function () {
-                swal.fire("error", "Something Went Wrong, Try Again");
+                swal.fire("error", "Something Went Wrong, Try Again", "error");
                 // console.log("Something Went Wrong, Try Again");
             }
         });
@@ -90,7 +90,8 @@ $(document).ready(function () {
                     });
                 }
             });
-        } else {
+        }
+        else {
             $('#street').prop('disabled', true);
         }
     });
@@ -112,10 +113,10 @@ $(document).ready(function () {
                 $('#report_new_crime_action')[0].reset();
             },
             error: function(xhr, status, error) {
-                swal.fire("error", "Something Went Wrong, Try Again");
-                // console.log("XHR status: " + status);
-                // console.log("Error message: " + error);
-                // console.log("Server response: " + xhr.responseText);
+                swal.fire("error", "Something Went Wrong, Try Again", "error");
+                console.log("XHR status: " + status);
+                console.log("Error message: " + error);
+                console.log("Server response: " + xhr.responseText);
             }
 
         });
@@ -144,7 +145,7 @@ $(document).ready(function () {
                 $('#update_case_status')[0].reset();
             },
             error: function(xhr, status, error) {
-                swal.fire("error", "Something Went Wrong, Try Again");
+                swal.fire("error", "Something Went Wrong, Try Again", "error");
             }
 
         });
@@ -171,7 +172,7 @@ $(document).ready(function () {
                 $('#register_police_staff')[0].reset();
             },
             error: function(xhr, status, error) {
-                swal.fire("error", "Something Went Wrong, Try Again");
+                swal.fire("error", "Something Went Wrong, Try Again", "error");
             }
         });
     });
@@ -189,7 +190,7 @@ $(document).ready(function () {
             contentType: false,
             processData: false,
             success: function (response) {
-                swal.fire("success", "Police Staff Registered Successfully, you can login to check case info").then((result) => {
+                swal.fire("success", "Crime Reported Successfully, you can login to check case info by using generated email such as ezra@segaye.com").then((result) => {
                     if (result.isConfirmed) {
                         window.location.href = "/login";
                     }
@@ -197,7 +198,7 @@ $(document).ready(function () {
                 $('#crime_report_action')[0].reset();
             },
             error: function(xhr, status, error) {
-                swal.fire("error", "Something Went Wrong, Try Again");
+                swal.fire("error", "Something Went Wrong, Try Again", "error");
             }
         });
     });

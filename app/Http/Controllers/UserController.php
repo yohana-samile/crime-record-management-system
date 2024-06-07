@@ -6,6 +6,7 @@
     use App\Models\Reporter;
     use App\Models\PoliceStaff;
     use App\Models\Rank;
+    use App\Models\Region;
     use Auth;
     use Illuminate\Support\Facades\Validator;
     use Illuminate\Http\JsonResponse;
@@ -18,7 +19,8 @@
         }
         public function register_user(){
             $ranks = Rank::get();
-            return view('register_user', compact('ranks'));
+            $regions = Region::get();
+            return view('register_user', compact('ranks', 'regions'));
         }
 
         // register_police_staff
@@ -30,6 +32,7 @@
                 'gender' => 'required',
                 'address' => 'required',
                 'rank_id' => 'required',
+                'region' => 'required',
                 'password' => 'required',
             ]);
             $badge_number = rand(3000, 30000);
@@ -56,6 +59,7 @@
             $register_police->dob = $validateData['dob'];
             $register_police->address = $validateData['address'];
             $register_police->rank_id = $validateData['rank_id'];
+            $register_police->region = $validateData['region'];
             $register_police->badge_number = $bg_number;
 
             $user->policeStaff()->save($register_police);
@@ -70,7 +74,8 @@
 
         // reporter
         public function reporter(){
-            $reporters = User::whereHas('reporter')->get();
+            $reporters = DB::select("SELECT users.name, users.created_at, users.name, users.email, reporters.phone_number FROM users, reporters WHERE reporters.user_id = users.id ");
+            // $reporters = User::whereHas('reporter')->get();
             return view('reporter', compact('reporters'));
         }
     }

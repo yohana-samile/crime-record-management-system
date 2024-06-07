@@ -22,13 +22,14 @@
         }
 
         public function  crime_report_action(Request $request){
-               $validateData = $request->validate([
+            $validateData = $request->validate([
                 'name' => 'required',
                 'crime_type_id' => 'required',
                 'phone_number' => 'required',
                 'region' => 'required',
                 'district' => 'required',
                 'ward' => 'required',
+                'case_discription' => 'nullable',
                 'password' => 'required',
             ]);
 
@@ -59,6 +60,7 @@
             $report_case->region = $validateData['region'];
             $report_case->district = $validateData['district'];
             $report_case->ward = $validateData['ward'];
+            $report_case->case_discription = $validateData['case_discription'];
             $report_case->rb_number = $rb_number;
 
             $reporter->caseReported()->save($report_case);

@@ -33,6 +33,40 @@
             }
         }
 
+        // edit crime typ
+        public function edit_crime_type($id){
+            $crime = Crime_type::findOrFail($id);
+            if (!empty($crime)) {
+                return view('crimeTypes/edit_crime_type', compact('crime'));
+            }
+            else{
+                return redirect()->back()->withErrors('error', 'Fail Try Again!');
+            }
+        }
+
+        public function edit_crime_type_action(Request $request){
+            $id = $request->input('id');
+            $crimeType = Crime_type::findOrFail($id);
+            $crimeType->update($request->all());
+            if($crimeType){
+                return redirect()->back()->with('success', 'Crime Type Updated Successfuly');
+            }
+            else{
+                return redirect()->back()->withErrors('error', 'Fail Try Again!');
+            }
+        }
+        // delete crime typ
+        public function delete_crime_type(Request $request, $id){
+            $crime = Crime_type::findOrFail($id);
+            $crime->delete($crime);
+            if ($crime) {
+                return redirect()->back()->with('success', 'crime Deleted Successfuly');
+            }
+            else{
+                return redirect()->back()->withErrors('error', 'Fail Try Again!');
+            }
+        }
+
         public function report_new_crime(){
             $crimes = Crime_type::get();
             $regions = Region::get();
@@ -77,11 +111,13 @@
                 'region' => 'required',
                 'district' => 'required',
                 'ward' => 'required',
+                'case_discription' => 'nullable',
             ]);
             $rb_number = rand(1000, 10000);
             $rb_number_generated = 'crms_'.$rb_number;
             $user = Auth::User()->id;
-            $reporter = Reporter::find($user);
+            $reporter = DB::table('reporters')->where('user_id', $user)->first();
+
             $insert = CaseReported::create([
                 'rb_number' => $rb_number_generated,
                 'reporter_id' => $reporter->id,
@@ -89,7 +125,7 @@
                 'region' => $validate['region'],
                 'district' => $validate['district'],
                 'ward' => $validate['ward'],
-                'case_discription' => $request->input('case_discription'),
+                'case_discription' => $validate['case_discription'],
             ]);
             if ($insert) {
                 return response()->json('success');
@@ -101,7 +137,16 @@
 
         // case_reported
         public function case_reported(){
-            $case_reported = DB::select("SELECT case_reporteds.id, case_reporteds.rb_number, case_reporteds.region, case_reporteds.district, case_reporteds.ward, case_reporteds.case_status, case_reporteds.created_at, users.name as user_name, crime_types.name as crime_type_name FROM case_reporteds, users, reporters, crime_types WHERE case_reporteds.reporter_id = reporters.id AND reporters.user_id = users.id AND case_reporteds.crime_type_id = crime_types.id ");
+            $user = Auth::User()->id;
+            $reporter = DB::table('reporters')->where('user_id', $user)->first();
+
+            $case_reported = DB::select("SELECT case_reporteds.id, case_reporteds.rb_number, case_reporteds.region, case_reporteds.district, case_reporteds.ward, case_reporteds.case_status, case_reporteds.created_at, users.name as user_name, crime_types.name as crime_type_name FROM
+                case_reporteds, users, reporters, crime_types WHERE
+                case_reporteds.reporter_id = reporters.id AND
+                reporters.user_id = users.id AND
+                case_reporteds.crime_type_id = crime_types.id
+                AND reporter_id = '$reporter->id'
+            ");
             return view('case_reported', compact('case_reported'));
         }
 

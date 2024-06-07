@@ -16,9 +16,8 @@
     <link rel="stylesheet" href="{{ url('css/style.css')}}">
     <link rel="stylesheet" href="{{ url('datatables/dataTables.bootstrap4.min.css')}}">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
     @php
@@ -43,16 +42,17 @@
                     </li>
                     @if ($userRole->role_name !== 'is_crime_reporter')
                         <li>
-                            <a href="{{url('user')}}" class="text-decoration-none"><span class="fa fa-user mr-3"></span> Users</a>
+                            <a href="{{url('user')}}" class="text-decoration-none"><span class="fa fa-user mr-3"></span> Police Staff</a>
                         </li>
                         <li>
                             <a href="{{url('reporter')}}" class="text-decoration-none"><span class="fa fa-user mr-3"></span> Reportes</a>
                         </li>
                     @endif
-
-                    <li>
-                        <a href="{{ url('report_new_crime')}}" class="text-decoration-none"><span class="fa fa-briefcase mr-3"></span> Report Crime</a>
-                    </li>
+                    @if ($userRole->role_name === 'is_crime_reporter')
+                        <li>
+                            <a href="{{ url('report_new_crime')}}" class="text-decoration-none"><span class="fa fa-briefcase mr-3"></span> Report Crime</a>
+                        </li>
+                    @endif
                     <li>
                         <a href="{{url ('case_reported')}}" class="text-decoration-none"><span class="fa fa-sticky-note mr-3"></span> Crime Reported</a>
                     </li>

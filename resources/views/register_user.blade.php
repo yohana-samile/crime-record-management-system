@@ -33,6 +33,14 @@
                         <input type="tel" name="address" id="address" class="form-control" required>
                     </div>
                     <div class="mb-3">
+                        <select name="region" id="region" class="form-control" required>
+                            <option selected disabled hidden>Choose Working Station Region</option>
+                            @foreach ($regions as $region)
+                                <option value="{{ $region->name }}">{{ $region->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <select name="rank_id" id="rank_id" class="form-control">
                             <option selected hidden disabled>Choose Police Rank/Position</option>
                             @foreach ($ranks as $rank)
